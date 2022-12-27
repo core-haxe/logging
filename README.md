@@ -2,6 +2,7 @@
 flexible logging framework supporting various "adaptors" (used throughout core haxe libraries)
 
 # basic usage
+
 ```haxe
 LogManager.instance.addAdaptor(new ConsoleLogAdaptor({
     levels: [LogLevel.Info, LogLevel.Error], // will show all logs by default
@@ -9,6 +10,7 @@ LogManager.instance.addAdaptor(new ConsoleLogAdaptor({
     packages: ["foo.bar"] // will show all packages by default
 }));
 ```
+
 (note that each log adaptor can have its own settings)
 
 ```haxe
