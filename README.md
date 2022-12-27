@@ -12,7 +12,7 @@ LogManager.instance.addAdaptor(new ConsoleLogAdaptor({
 (note that each log adaptor can have its own settings)
 
 ```haxe
-var logger = new Logger(SomeClass);
+var log = new Logger(SomeClass);
 log.info("some string", someObject);
 log.error("some string", someObject);
 log.warn("some string", someObject);
