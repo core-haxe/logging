@@ -1,30 +1,11 @@
 package logging.formatters;
 
-using StringTools;
-
-class DefaultFormatter implements ILogLineFormatter {
+class JSONFormatter implements ILogLineFormatter {
     public function new() {
     }
 
     public function format(data:LogData, buffer:StringBuf) {
-        buffer.add(data.timestamp);
-        buffer.add(" > ");
-        buffer.add(cast(data.level, String).toUpperCase().rpad(" ", 7));
-        buffer.add(" > ");
-
-        if (data.ref != null) {
-            buffer.add(data.ref);
-            buffer.add(" > ");
-        }
-
-        if (data.instanceId != null) {
-            buffer.add(data.instanceId);
-            buffer.add(" > ");
-        }
-
-        if (data.message != null) {
-            buffer.add(data.message);
-        }
+        buffer.add(haxe.Json.stringify(data));
     }
 
     public function formatObject(obj:Any):String {

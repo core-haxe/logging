@@ -1,9 +1,9 @@
 package logging;
 
-enum LogLevel {
-    Info;
-    Debug;
-    Error;
-    Warning;
-    Data;
+enum abstract LogLevel(String) {
+    var Info;
+    var Debug;
+    var Error;
+    var Warning;
+    var Data;
 }
