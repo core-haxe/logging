@@ -1,8 +1,8 @@
 package logging;
 
 import haxe.Timer;
-import logging.formatters.DefaultFormatter;
 import logging.adaptors.NullLogAdaptor;
+import logging.formatters.DefaultFormatter;
 
 using StringTools;
 
@@ -67,6 +67,17 @@ class LogManager {
 
         _shouldLogDebug = willRespondToLevel(LogLevel.Debug);
         return _shouldLogDebug;
+    }
+
+    private var _shouldLogData:Null<Bool> = null;
+    public var shouldLogData(get, null):Bool;
+    private function get_shouldLogData():Bool {
+        if (_shouldLogData != null) {
+            return _shouldLogData;
+        }
+
+        _shouldLogData = willRespondToLevel(LogLevel.Data);
+        return _shouldLogData;
     }
 
     private var _shouldLogWarnings:Null<Bool> = null;
