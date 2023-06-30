@@ -1,10 +1,12 @@
 package logging.adaptors;
 
+import sys.FileSystem;
 import sys.io.File;
 
 typedef CallbackLogAdapatorConfig = {
     > BaseLogAdaptorConfig,
     var ?filename:String;
+    var ?maxSizeBytes:Int;
 }
 
 class FileLogAdaptor implements ILogAdaptor {
@@ -29,6 +31,15 @@ class FileLogAdaptor implements ILogAdaptor {
         var filename = data.ref + ".log";
         if (_config.filename != null) {
             filename = _config.filename;
+        }
+        var maxSizeBytes:Int = 41943040; // 40mb default
+        if (_config.maxSizeBytes != null) {
+            maxSizeBytes = _config.maxSizeBytes;
+        }
+
+        var stats = FileSystem.stat(filename);
+        if (stats.size > maxSizeBytes) {
+            FileSystem.deleteFile(filename);
         }
 
         var file = File.append(filename, false);
