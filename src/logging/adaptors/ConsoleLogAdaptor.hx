@@ -1,7 +1,5 @@
 package logging.adaptors;
 
-import haxe.macro.Type.Ref;
-
 typedef ConsoleLogAdapatorConfig = {
     > BaseLogAdaptorConfig,
     var ?prefix:String;
