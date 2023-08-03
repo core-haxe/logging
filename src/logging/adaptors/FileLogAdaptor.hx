@@ -37,6 +37,9 @@ class FileLogAdaptor implements ILogAdaptor {
             maxSizeBytes = _config.maxSizeBytes;
         }
 
+        if (!FileSystem.exists(filename)) {
+            File.saveContent(filename, "");
+        }
         var stats = FileSystem.stat(filename);
         if (stats.size > maxSizeBytes) {
             FileSystem.deleteFile(filename);
