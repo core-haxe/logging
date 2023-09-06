@@ -9,7 +9,7 @@ class DefaultFormatter implements ILogLineFormatter {
     public function format(data:LogData, buffer:StringBuf) {
         buffer.add(data.timestamp);
         buffer.add(" > ");
-        buffer.add(cast(data.level, String).toUpperCase().rpad(" ", 7));
+        buffer.add(cast(data.level, String).toUpperCase().rpad(" ", 11));
         buffer.add(" > ");
 
         if (data.ref != null) {

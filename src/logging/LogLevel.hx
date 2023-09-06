@@ -6,4 +6,5 @@ enum abstract LogLevel(String) {
     var Error;
     var Warning;
     var Data;
+    var Performance;
 }

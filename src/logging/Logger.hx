@@ -31,6 +31,10 @@ class Logger implements ILogger {
         log(LogLevel.Data, message, data);
     }
 
+    public function performance(message:String, data:Any = null) {
+        log(LogLevel.Performance, message, data);
+    }
+
     private function log(level:LogLevel, message:String, data:Any = null) {
         LogManager.instance.log({
             timestamp: Date.now().toString(),
