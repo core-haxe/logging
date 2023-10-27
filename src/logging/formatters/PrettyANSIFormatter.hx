@@ -26,6 +26,7 @@ class PrettyANSIFormatter implements ILogLineFormatter {
 			case Error: "\033[31m";
 			case Warning: "\033[33m";
 			case Data: "\033[35m";
+			case Performance: "\033[36m";
 		}
 
 		buffer.add(colors.level);
