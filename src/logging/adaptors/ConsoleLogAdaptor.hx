@@ -40,7 +40,11 @@ class ConsoleLogAdaptor implements ILogAdaptor {
             js.Browser.console.log(s);
         }
         #elseif sys
-        Sys.println(s);
+        if (data != null) {
+            Sys.println(s + " " + config.formatter.formatObject(data));
+        } else {
+            Sys.println(s);
+        }
         #else
         trace(s);
         #end

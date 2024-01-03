@@ -6,4 +6,5 @@ interface ILogger {
     function error(message:String, data:Any = null):Void;
     function warn(message:String, data:Any = null):Void;
     function data(message:String, data:Any = null):Void;
+    function performance(message:String, data:Any = null):Void;
 }
