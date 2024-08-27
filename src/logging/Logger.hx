@@ -19,42 +19,42 @@ class Logger implements ILogger {
     #if !no_inlined_logger
     inline
     #end
-    public function info(message:String, data:Any = null) {
+    public function info(message:String, data:Dynamic = null) {
         log(LogLevel.Info, message, data);
     }
 
     #if !no_inlined_logger
     inline
     #end
-    public function debug(message:String, data:Any = null) {
+    public function debug(message:String, data:Dynamic = null) {
         log(LogLevel.Debug, message, data);
     }
 
     #if !no_inlined_logger
     inline
     #end
-    public function error(message:String, data:Any = null) {
+    public function error(message:String, data:Dynamic = null) {
         log(LogLevel.Error, message, data);
     }
 
     #if !no_inlined_logger
     inline
     #end
-    public function warn(message:String, data:Any = null) {
+    public function warn(message:String, data:Dynamic = null) {
         log(LogLevel.Warning, message, data);
     }
 
     #if !no_inlined_logger
     inline
     #end
-    public function data(message:String, data:Any = null) {
+    public function data(message:String, data:Dynamic = null) {
         log(LogLevel.Data, message, data);
     }
 
     #if !no_inlined_logger
     inline
     #end
-    public function performance(message:String, data:Any = null) {
+    public function performance(message:String, data:Dynamic = null) {
         log(LogLevel.Performance, message, data);
     }
 
@@ -89,7 +89,7 @@ class Logger implements ILogger {
     #if !no_inlined_logger
     inline
     #end
-    private function log(level:LogLevel, message:String, data:Any = null) {
+    private function log(level:LogLevel, message:String, data:Dynamic = null) {
         LogManager.instance.log({
             timestamp: Date.now().toString(),
             level: level,
