@@ -7,4 +7,5 @@ typedef BaseLogAdaptorConfig = {
     var ?formatter:ILogLineFormatter;
     var ?levels:Array<LogLevel>;
     var ?packages:Array<String>;
+    var ?exclusions:Array<String>;
 }

@@ -1,7 +1,22 @@
 package logging;
 
+#if (!macro && (modular && !modular_host))
+
+extern class Logger implements ILogger {
+    public function new(ref:Class<Dynamic> = null, instanceId:String = null, generateInstanceId:Bool = false);
+    public function info(message:String, data:Any = null):Void;
+    public function debug(message:String, data:Any = null):Void;
+    public function error(message:String, data:Any = null):Void;
+    public function warn(message:String, data:Any = null):Void;
+    public function data(message:String, data:Any = null):Void;
+    public function performance(message:String, data:Any = null):Void;
+}
+
+#else
+
 import haxe.crypto.Sha1;
 
+@:keep @:expose
 class Logger implements ILogger {
     private var _ref:String = null;
     private var _instanceId:String = null;
@@ -140,3 +155,5 @@ class Logger implements ILogger {
         return uuid;
     }
 }
+
+#end

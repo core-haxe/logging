@@ -1,11 +1,25 @@
 package logging;
 
+#if (!macro && (modular && !modular_host))
+
+extern class LogManager {
+    public static var instance(get, null):LogManager;
+    public var shouldLogDebug(get, null):Bool;
+    public var shouldLogWarnings(get, null):Bool;
+    public function log(data:LogData):Void;
+}
+
+#else
+
 import haxe.Timer;
 import logging.adaptors.NullLogAdaptor;
 import logging.formatters.DefaultFormatter;
 
 using StringTools;
 
+#if (modular && modular_host)
+@:expose @:keep
+#end
 class LogManager {
     private static var _instance:LogManager = null;
     public static var instance(get, null):LogManager;
@@ -115,6 +129,14 @@ class LogManager {
         for (a in _adaptors) {
             var allow = !a.config.disabled;
 
+            if (allow && data.ref != null && a.config.exclusions != null) {
+                for (p in a.config.exclusions) {
+                    if (data.ref.startsWith(p)) {
+                        allow = false;
+                        break;
+                    }
+                }
+            }
             if (allow && a.config.levels != null) {
                 if (!a.config.levels.contains(data.level)) {
                     allow = false;
@@ -150,3 +172,5 @@ class LogManager {
         _adaptors.push(new NullLogAdaptor());
     }
 }
+
+#end
