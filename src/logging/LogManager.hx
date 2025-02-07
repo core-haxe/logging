@@ -6,6 +6,7 @@ extern class LogManager {
     public static var instance(get, null):LogManager;
     public var shouldLogDebug(get, null):Bool;
     public var shouldLogWarnings(get, null):Bool;
+    public var shouldLogData(get, null):Bool;
     public function log(data:LogData):Void;
 }
 
