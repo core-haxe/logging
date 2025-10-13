@@ -3,6 +3,8 @@ package logging;
 #if (!macro && (modular && !modular_host))
 
 extern class Logger implements ILogger {
+    public var instanceId:String;
+
     public function new(ref:Class<Dynamic> = null, instanceId:String = null, generateInstanceId:Bool = false);
     public function info(message:String, data:Any = null):Void;
     public function debug(message:String, data:Any = null):Void;
@@ -19,15 +21,15 @@ import haxe.crypto.Sha1;
 @:keep @:expose
 class Logger implements ILogger {
     private var _ref:String = null;
-    private var _instanceId:String = null;
+    public var instanceId:String = null;
     
     public function new(ref:Class<Dynamic> = null, instanceId:String = null, generateInstanceId:Bool = false) {
         if (ref != null) {
             _ref = Type.getClassName(ref);
         }
-        _instanceId = instanceId;
-        if (_instanceId == null && generateInstanceId) {
-            _instanceId = generateUuid();
+        this.instanceId = instanceId;
+        if (this.instanceId == null && generateInstanceId) {
+            this.instanceId = generateUuid();
         }
     }
 
@@ -111,7 +113,7 @@ class Logger implements ILogger {
             message: message,
             data: data,
             ref: _ref,
-            instanceId: _instanceId
+            instanceId: instanceId
         });
     }
 
@@ -131,9 +133,9 @@ class Logger implements ILogger {
         }
         _uniqueIds.set(key, n);
         if (prefix != null) {
-            _instanceId = prefix + n;
+            instanceId = prefix + n;
         } else {
-            _instanceId = "instance" + n;
+            instanceId = "instance" + n;
         }
     }
 
