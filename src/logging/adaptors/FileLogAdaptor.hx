@@ -45,13 +45,25 @@ class FileLogAdaptor implements ILogAdaptor {
             FileSystem.deleteFile(filename);
         }
 
-        var file = File.append(filename, false);
+        var fileData:String = null;
         if (data.data != null) {
-            file.writeString(sb.toString() + ", " + data.data + "\n");
+            fileData = sb.toString() + ", " + data.data + "\n";
         } else {
-            file.writeString(sb.toString() + "\n");
+            fileData = sb.toString() + "\n";
         }
 
+        #if nodejs // File.append doesnt actually append on nodejs under OSX (and probably other haxe targets)
+
+        var file = js.node.Fs.openSync(filename, "a"); // 'a' = append
+        js.node.Fs.writeSync(file, fileData);
+        js.node.Fs.closeSync(file);
+
+        #else
+
+        var file = File.append(filename, false);
+        file.writeString(filefileData);
         file.close();
+
+        #end
     }
 }
